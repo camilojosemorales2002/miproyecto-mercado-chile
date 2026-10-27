@@ -5,6 +5,12 @@
 
 Un dashboard financiero e interactivo que automatiza la extracción, procesamiento y visualización de datos de los principales activos del mercado financiero chileno (IPSA, Retail, Banca) y commodities/benchmarks globales.
 
+Conclusión
+
+El monitoreo integrado de este panel evidencia una clara divergencia en la dinámica macroeconómica y de mercado durante el ciclo 2024-2026. Por un lado, se observa una presión alcista reciente en el tipo de cambio (USD/CLP en torno a 984.36) impulsada por la volatilidad en los commodities y las condiciones financieras globales. Por otro lado, los activos locales muestran dinámicas desacopladas: mientras el sector retail (ej. Falabella en 6,369.90 CLP) refleja una sólida recuperación y revalorización bursátil tras un período de reestructuración, los índices globales como el S&P 500 consolidan una tendencia alcista estructural sobre los 7,500 puntos. Esta herramienta demuestra la capacidad de centralizar fuentes de datos en tiempo real (vía Python/Power BI) para transformar variables macro y bursátiles en insights accionables para la toma de decisiones financieras y la gestión de riesgos.
+
+
+
 ---
 
 ## Dashboard Overview
