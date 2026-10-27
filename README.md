@@ -9,7 +9,7 @@ Un dashboard financiero e interactivo que automatiza la extracción, procesamien
 
 ## Dashboard Overview
 
-![Dashboard Principal](powerbi/screenshots/dashboard_final.png)
+![Dashboard Principal](powerbi/screenshots/dashboard_final_2.png)
 
 ---
 
