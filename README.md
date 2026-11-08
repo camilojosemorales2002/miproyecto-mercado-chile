@@ -15,7 +15,7 @@ El monitoreo integrado de este panel evidencia una clara divergencia en la diná
 
 ## Dashboard Overview
 
-![Dashboard Principal](powerbi/screenshots/dashboard_final_2.png)
+![Dashboard Principal](powerbi/screenshots/dashboard_final_3.png)
 
 ---
 
