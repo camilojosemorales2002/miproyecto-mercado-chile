@@ -2,7 +2,7 @@
 
 Dashboard interactivo en Power BI que compara acciones chilenas con el tipo de cambio, las materias primas y el mercado global. Lo alimenta un pipeline de datos automatizado en Python.
 
-![Dashboard en Power BI](dashboard_final_3.png)
+![Dashboard en Power BI](dashboard_final_3)
 
 ---
 
