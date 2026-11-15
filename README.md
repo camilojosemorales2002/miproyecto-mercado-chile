@@ -1,57 +1,104 @@
-# Query: 
-# ContextLines: 1
+# Dashboard del Mercado Financiero Chileno y Benchmarks Globales
 
-# Chilean Financial Market & Global Benchmarks Dashboard
+Dashboard interactivo en Power BI que compara acciones chilenas con el tipo de cambio, las materias primas y el mercado global. Lo alimenta un pipeline de datos automatizado en Python.
 
-Un dashboard financiero e interactivo que automatiza la extracción, procesamiento y visualización de datos de los principales activos del mercado financiero chileno (IPSA, Retail, Banca) y commodities/benchmarks globales.
-
-Conclusión
-
-El monitoreo integrado de este panel evidencia una clara divergencia en la dinámica macroeconómica y de mercado durante el ciclo 2024-2026. Por un lado, se observa una presión alcista reciente en el tipo de cambio (USD/CLP en torno a 984.36) impulsada por la volatilidad en los commodities y las condiciones financieras globales. Por otro lado, los activos locales muestran dinámicas desacopladas: mientras el sector retail (ej. Falabella en 6,369.90 CLP) refleja una sólida recuperación y revalorización bursátil tras un período de reestructuración, los índices globales como el S&P 500 consolidan una tendencia alcista estructural sobre los 7,500 puntos. Esta herramienta demuestra la capacidad de centralizar fuentes de datos en tiempo real (vía Python/Power BI) para transformar variables macro y bursátiles en insights accionables para la toma de decisiones financieras y la gestión de riesgos.
-
-
+![Dashboard en Power BI](dashboard.png)
 
 ---
 
-## Dashboard Overview
+## ¿Qué problema resuelve?
 
-![Dashboard Principal](powerbi/screenshots/dashboard_final_3.png)
+Seguir el mercado chileno exige mirar varias cosas a la vez: el dólar, el cobre, el petróleo, Wall Street y las acciones locales. Este proyecto automatiza la descarga y el procesamiento de esos datos y los reúne en un solo tablero, para responder rápidamente:
 
----
-
-## Tech Stack & Architecture
-
-- **ETL & Data Pipeline:** Python (`yfinance`, `pandas`) para automatizar la extracción de series de tiempo históricas y cálculo de retornos.
-- **Data Visualization & Analytics:** Power BI Desktop, métricas DAX (`LASTNONBLANKVALUE` para precios al cierre diarios) y modelado de datos.
-- **Version Control:** Git & GitHub.
+- ¿Cómo se han movido las acciones chilenas frente al S&P 500?
+- ¿Qué relación hay entre el cobre, el dólar y acciones como SQM?
+- ¿Qué activos han sido más volátiles en el último año?
 
 ---
 
-## 📈 Assets Tracked
+## Activos cubiertos
 
-- **Tipo de Cambio:** USD/CLP
-- **Commodities:** Cobre (Futuros USD/lb) y Petróleo WTI (USD/barril)
-- **Acciones Chilenas (IPSA):** Falabella, Cencosud, Banco de Chile, Banco Santander Chile, SQM
-- **Benchmark Global:** S&P 500 Index (`^GSPC`)
+| Grupo | Activos |
+|---|---|
+| **Acciones chilenas (IPSA)** | Falabella, Cencosud, Banco de Chile, Banco Santander Chile, SQM-B |
+| **Moneda y materias primas** | USD/CLP, cobre (futuros, USD/lb), petróleo WTI (USD/barril) |
+| **Benchmarks globales** | S&P 500, iShares MSCI Mexico (EWW) como referencia latinoamericana |
 
 ---
 
-## Cómo ejecutar el proyecto
+## Cómo funciona
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [https://github.com/TU_USUARIO/TU_REPOSITORIO.git](https://github.com/TU_USUARIO/TU_REPOSITORIO.git)
-   cd TU_REPOSITORIO
+```
+Yahoo Finance  →  Python (ETL)  →  CSV / Excel  →  Power BI (modelo + DAX)  →  Dashboard
+```
 
-Instalar dependencias de Python:
+### 1. Pipeline ETL en Python
 
+El script descarga dos años de precios diarios con `yfinance` y genera:
+
+| Archivo | Contenido |
+|---|---|
+| `precios_historicos_mercado.csv` | Precios de cierre diarios de todos los activos |
+| `retornos_diarios_mercado.csv` | Retornos diarios |
+| `Dashboard_Mercado_Tiempo_Real.xlsx` | Tres hojas: resumen ejecutivo, precios históricos y matriz de correlación |
+
+El **resumen ejecutivo** calcula para cada activo el precio actual, la variación diaria, mensual y anual, y la volatilidad anualizada. La **matriz de correlación** mide qué activos se mueven juntos.
+
+### 2. Dashboard en Power BI
+
+- **Tarjetas KPI** con el último precio de cada activo.
+- **Gráficos de evolución** del dólar, el S&P 500, el petróleo, el cobre y las acciones de retail.
+- **Medidas DAX** como `LASTNONBLANKVALUE` para mostrar el último precio de cierre disponible, aunque el día no haya sido hábil.
+- Navegación por año, trimestre, mes y día.
+
+---
+
+## Principales observaciones (ene 2025 – nov 2026)
+
+- **Retail con trayectorias opuestas:** Falabella casi duplicó su precio (de ~3.300 a ~6.500 CLP), mientras Cencosud retrocedió hasta ~1.700 CLP tras su máximo de mediados de 2025.
+- **Cobre al alza:** subió de ~4,2 a más de 6 USD/lb, un factor de apoyo para SQM y para el peso chileno.
+- **Dólar en "V":** el USD/CLP bajó desde ~1.000 hasta ~850 a inicios de 2026 y luego volvió a subir a ~975.
+- **Wall Street:** el S&P 500 se recuperó de la caída de abril de 2025 y alcanzó nuevos máximos sobre los 7.500 puntos.
+
+---
+
+## Tecnologías
+
+- **Python:** pandas, NumPy, yfinance, openpyxl
+- **Power BI Desktop:** modelo de datos y DAX
+- **Git y GitHub**
+
+---
+
+## Ejecución local
+
+```bash
+git clone https://github.com/camilojosemorales2002/miproyecto-mercado-chile.git
+cd miproyecto-mercado-chile
 pip install -r requirements.txt
-
-Ejecutar el script ETL:
-
 python scripts/download_data.py
+```
 
-Abrir el Dashboard:
-Abre el archivo power_bi/dashboard_mercado_chile.pbix en Power BI Desktop para interactuar con el modelo y los visuales.
+Después abre el archivo `.pbix` de la carpeta `powerbi/` en Power BI Desktop y haz clic en **Actualizar** para cargar los datos nuevos.
 
-Abre el archivo power_bi/dashboard_mercado_chile.pbix en Power BI Desktop para interactuar con el modelo y los visuales.
+---
+
+## Estructura
+
+```
+├── scripts/download_data.py   # Pipeline ETL
+├── data/                      # CSV y Excel generados
+├── powerbi/                   # Archivo .pbix del dashboard
+├── dashboard.png              # Captura del README
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## Autor
+
+**Camilo José Morales Carvajal**
+Licenciado en Ciencias de la Administración, Universidad Adolfo Ibáñez · Magíster en Estrategia y Gestión (en curso)
+
+[LinkedIn](https://www.linkedin.com/in/camilojos%C3%A9morales/) · [GitHub](https://github.com/camilojosemorales2002) · Otro proyecto: [Terminal de Equity Research](https://asset-management-tool-povmphoq23xobuy6xvgwac.streamlit.app/)
