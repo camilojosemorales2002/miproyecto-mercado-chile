@@ -89,7 +89,7 @@ Después abre el archivo `.pbix` de la carpeta `powerbi/` en Power BI Desktop y 
 ├── scripts/download_data.py   # Pipeline ETL
 ├── data/                      # CSV y Excel generados
 ├── powerbi/                   # Archivo .pbix del dashboard
-├── dashboard.png              # Captura del README
+├── dashboard_final_3.png      # Captura del README
 ├── requirements.txt
 └── README.md
 ```
