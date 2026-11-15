@@ -2,7 +2,7 @@
 
 Dashboard interactivo en Power BI que compara acciones chilenas con el tipo de cambio, las materias primas y el mercado global. Lo alimenta un pipeline de datos automatizado en Python.
 
-![Dashboard en Power BI](dashboard_final_3.png)
+![Dashboard en Power BI](powerbi/screenshots/dashboard_final_3.png)
 
 ---
 
@@ -53,12 +53,15 @@ El **resumen ejecutivo** calcula para cada activo el precio actual, la variació
 
 ---
 
-## Principales observaciones (ene 2025 – nov 2026)
+## Principales observaciones (oct 2024 – oct 2026)
 
-- **Retail con trayectorias opuestas:** Falabella casi duplicó su precio (de ~3.300 a ~6.500 CLP), mientras Cencosud retrocedió hasta ~1.700 CLP tras su máximo de mediados de 2025.
-- **Cobre al alza:** subió de ~4,2 a más de 6 USD/lb, un factor de apoyo para SQM y para el peso chileno.
-- **Dólar en "V":** el USD/CLP bajó desde ~1.000 hasta ~850 a inicios de 2026 y luego volvió a subir a ~975.
-- **Wall Street:** el S&P 500 se recuperó de la caída de abril de 2025 y alcanzó nuevos máximos sobre los 7.500 puntos.
+Calculadas con los datos generados por el pipeline:
+
+- **Bancos chilenos, los grandes ganadores:** Banco de Chile (+97%) y Santander Chile (+94%) casi duplicaron su precio, superando ampliamente al S&P 500 (+34%). Ambos tienen una correlación diaria de 0,63: se mueven como sector.
+- **Retail con trayectorias opuestas:** Falabella subió +102%, mientras Cencosud terminó solo +6%, tras caer 43% desde su máximo de mayo de 2025.
+- **SQM, el activo más volátil:** pasó de un mínimo de ~28.000 CLP (junio 2025) a un máximo de ~84.800 CLP (mayo 2026). Su correlación con el cobre es baja (0,22), lo que confirma que su precio responde más al litio que al cobre.
+- **Materias primas:** el cobre subió +43% hasta máximos cercanos a 6,8 USD/lb, y el petróleo WTI osciló entre 55 y 113 USD/barril.
+- **Dólar:** el USD/CLP tocó un máximo de ~1.013 (enero 2025), un mínimo de ~852 (febrero 2026) y cerró el período en ~984.
 
 ---
 
@@ -76,20 +79,22 @@ El **resumen ejecutivo** calcula para cada activo el precio actual, la variació
 git clone https://github.com/camilojosemorales2002/miproyecto-mercado-chile.git
 cd miproyecto-mercado-chile
 pip install -r requirements.txt
-python scripts/download_data.py
+python scripts/01script_mercado.py
 ```
 
-Después abre el archivo `.pbix` de la carpeta `powerbi/` en Power BI Desktop y haz clic en **Actualizar** para cargar los datos nuevos.
+Después abre `powerbi/dashboard_mercado_chile.pbix` en Power BI Desktop y haz clic en **Actualizar** para cargar los datos nuevos.
 
 ---
 
 ## Estructura
 
 ```
-├── scripts/download_data.py   # Pipeline ETL
+├── scripts/
+│   └── 01script_mercado.py    # Pipeline ETL
 ├── data/                      # CSV y Excel generados
-├── powerbi/                   # Archivo .pbix del dashboard
-├── dashboard_final_3.png      # Captura del README
+├── powerbi/
+│   ├── dashboard_mercado_chile.pbix
+│   └── screenshots/           # Capturas del dashboard
 ├── requirements.txt
 └── README.md
 ```
